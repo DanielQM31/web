@@ -83,7 +83,7 @@
             background-color: red;
             transform: rotate(-45deg);
             cursor: pointer;
-            animation: floatHeart 1.5s linear infinite;
+            animation: floatHeart 2.5s linear infinite; /* Duración extendida para evitar desapariciones prematuras */
         }
 
         .heart::before,
@@ -108,7 +108,7 @@
 
         @keyframes floatHeart {
             0% {
-                bottom: 0;
+                bottom: -20px; /* Empieza justo fuera de la vista para que siempre esté visible al inicio */
                 opacity: 0;
                 transform: translateX(0) rotate(-45deg);
             }
@@ -116,7 +116,7 @@
                 opacity: 1;
             }
             100% {
-                bottom: 100vh;
+                bottom: 100vh; /* Deja que el corazón se mueva fuera de la vista inferior */
                 opacity: 0;
                 transform: translateX(50px) rotate(-45deg);
             }
@@ -184,7 +184,7 @@
                 if (heart.parentElement) {
                     heart.remove();
                 }
-            }, 5000);
+            }, 3000); // Tiempo de vida del corazón ajustado para que siempre tenga tiempo de flotar completamente
         }
 
         setInterval(createHeart, 1000);
