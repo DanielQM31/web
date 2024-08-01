@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Día de la Novia</title>
+    <title>Rosa con Frase y Corazones Flotantes</title>
     <style>
         body {
             display: flex;
@@ -19,20 +19,21 @@
         .container {
             display: flex;
             align-items: center;
+            flex-direction: row; /* Cambiado a fila */
         }
 
         .rose {
             position: relative;
             width: 100px;
             height: 100px;
-            margin-right: 20px;
+            margin-right: 20px; /* Espacio entre la flor y el mensaje */
         }
 
         .stem {
             position: absolute;
             width: 10px;
             height: 150px;
-            background-color: hsl(120, 95%, 48%);
+            background-color: green;
             bottom: -150px;
             left: 45px;
         }
@@ -66,7 +67,13 @@
             font-size: 1.2em;
             color: #333;
             width: 300px;
-            text-align: center;
+            text-align: left; /* Alinea el texto a la izquierda */
+        }
+
+        .counter {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px; /* Espacio superior para el contador */
         }
 
         .heart {
@@ -75,7 +82,8 @@
             height: 20px;
             background-color: red;
             transform: rotate(-45deg);
-            animation: floatHeart 5s linear infinite;
+            cursor: pointer;
+            animation: floatHeart 1.5s linear infinite;
         }
 
         .heart::before,
@@ -113,6 +121,17 @@
                 transform: translateX(50px) rotate(-45deg);
             }
         }
+
+        @keyframes popHeart {
+            0% {
+                transform: scale(1) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3) rotate(-45deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -128,21 +147,43 @@
             <div class="center"></div>
         </div>
         <div class="message">
-            <p>“FELIZ DÍA MI AMOR”</p>
-            <p>Mi amor por ti culminará cuando termines de presionar todos los corazones :D</p>
-            <p>“DyK”</p>
+            <p>“Feliz día mi amor”</p>
+            <p>DyK</p>
+            <p>Atrapa corazones para tu regalo :D</p>
+        </div>
+        <div class="counter">
+            <p>S/. <span id="counterValue">0.000</span></p>
         </div>
     </div>
 
     <script>
+        let counter = 0;
+
+        function updateCounter() {
+            const counterValueElement = document.getElementById('counterValue');
+            counterValueElement.textContent = counter.toFixed(3);
+        }
+
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * 100 + 'vw';
             document.body.appendChild(heart);
 
+            heart.addEventListener('click', function() {
+                heart.style.animation = 'popHeart 0.5s forwards';
+                setTimeout(() => {
+                    heart.remove();
+                }, 500); // El tiempo debe ser igual al de la animación
+
+                counter += 0.001;
+                updateCounter();
+            });
+
             setTimeout(() => {
-                heart.remove();
+                if (heart.parentElement) {
+                    heart.remove();
+                }
             }, 5000);
         }
 
