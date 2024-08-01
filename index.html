@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de la Novia</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .rose {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+        .stem {
+            position: absolute;
+            width: 10px;
+            height: 150px;
+            background-color: green;
+            bottom: -150px;
+            left: 45px;
+        }
+
+        .petals {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .petal1 { top: 0; left: 0; }
+        .petal2 { top: 0; right: 0; }
+        .petal3 { bottom: 0; left: 0; }
+        .petal4 { bottom: 0; right: 0; }
+        .petal5 { top: 30px; left: 20px; }
+        .petal6 { top: 30px; right: 20px; }
+
+        .center {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: yellow;
+            border-radius: 50%;
+            top: 30px;
+            left: 30px;
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: #333;
+            width: 300px;
+            text-align: center;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: floatHeart 5s linear infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                bottom: 0;
+                opacity: 0;
+                transform: translateX(0) rotate(-45deg);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 100vh;
+                opacity: 0;
+                transform: translateX(50px) rotate(-45deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="rose">
+            <div class="stem"></div>
+            <div class="petals petal1"></div>
+            <div class="petals petal2"></div>
+            <div class="petals petal3"></div>
+            <div class="petals petal4"></div>
+            <div class="petals petal5"></div>
+            <div class="petals petal6"></div>
+            <div class="center"></div>
+        </div>
+        <div class="message">
+            <p>“FELIZ DÍA MI AMOR”</p>
+            <p>Mi amor por ti culminará cuando termines de presionar todos los corazones :D</p>
+            <p>“DyK”</p>
+        </div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 1000);
+    </script>
+</body>
+</html>
